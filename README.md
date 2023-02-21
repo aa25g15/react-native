@@ -24,7 +24,7 @@
  Hello World!
 </View>
 ```
-* This is fine
+* This is fine:
 ```jsx
 <View>
  <Text>Hello World!</Text>
@@ -33,4 +33,7 @@
 * However, from web dev we know that it is fine, it is not too strict, in RN, you cannot be flexible with what the components are intended for
 * ```<View>``` - Container component, similar to div
 * ```<Button title="click me!" />``` - This button will auto adjust to basic styling in iOS and Android
+* Inline styles, remember the styling is inspired by CSS not is not CSS and does not have all the features, for example, "border" property is not supported but there is "borderWidth" and "borderColor":
+<img width="1440" alt="image" src="https://user-images.githubusercontent.com/26576978/220410912-1f47ec00-af40-48e1-8bd5-5792a345c266.png">
+
 
