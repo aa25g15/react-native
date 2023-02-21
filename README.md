@@ -11,3 +11,9 @@
   * Expo makes life a little easier, more than RN CLI
 * ```npm i -g expo-cli```
 * ```Expo init {course name}```
+* Install the Expo Go app and scan barcode after running ```npm start```
+* Install emulators
+  * XCODE - iOS
+  * Android Studio
+* Remember that HTML elements will not work on RN cause native apps are not browsers and they do not have a DOM
+
