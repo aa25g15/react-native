@@ -35,5 +35,7 @@
 * ```<Button title="click me!" />``` - This button will auto adjust to basic styling in iOS and Android
 * Inline styles, remember the styling is inspired by CSS not is not CSS and does not have all the features, for example, "border" property is not supported but there is "borderWidth" and "borderColor":
 <img width="1440" alt="image" src="https://user-images.githubusercontent.com/26576978/220410912-1f47ec00-af40-48e1-8bd5-5792a345c266.png">
-
+* Better to create Stylesheet object:
+<img width="1440" alt="image" src="https://user-images.githubusercontent.com/26576978/220411870-bda2d68e-af9b-44de-8806-20cb0b56ccb5.png">
+* There is flexbox in RN much like CSS and is generally used to create layouts like in web dev
 
