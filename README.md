@@ -90,4 +90,13 @@ https://docs.google.com/presentation/d/1Uz0JUKz6YeB24xLsKsJpmcyph5DjgJU0pZoUuCA8
 * Adding an image - Note that this is not the same as the web, we cannot "fetch" and image from an endpoint as such, the ```<Image>``` component also supports the style attribute
 <img width="970" alt="image" src="https://user-images.githubusercontent.com/26576978/220612762-bf9d07b0-aaf1-4512-ba60-00719b5ec877.png">
 
-* XYZ
+* Expo allows us to set background-color for all screens in one go by using the config file App.js
+<img width="1440" alt="image" src="https://user-images.githubusercontent.com/26576978/220614514-345358e4-6e97-4b44-9519-68b3667b5ee3.png">
+
+* But remember that on dark background the status bar (the bar with battery percentage, time etc.) can get hard to see, so expo provides a solution for that, you can set the style to 'light' on darker backgrounds to make the status bar white in color, read more on docs:
+<img width="552" alt="image" src="https://user-images.githubusercontent.com/26576978/220614943-f2e5b401-4053-4d2e-b5be-f5f5eed65ae1.png">
+
+* Remote Debugging - You can open the developer menu from terminal by pressing m (I think) and then you can choose the option to remotely debug JS. This will open a devtools window in Chrome and you can see network requests, logs etc.
+* You can also use react-devtools - ```npm i -g react-devtools```
+* Then, in separate terminal, run command - `react-devtools`
+* Then, enable remote debugging in the developer menu and the devtools will connect, you can see component tree, state etc.
