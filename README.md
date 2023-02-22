@@ -79,5 +79,9 @@ https://docs.google.com/presentation/d/1Uz0JUKz6YeB24xLsKsJpmcyph5DjgJU0pZoUuCA8
 * Two way binding on TextInput, attach onChangeText to a handler that updates component state and attach value of TextInput to the state, this is not really specific to RN but is simple React:
 <img width="1440" alt="image" src="https://user-images.githubusercontent.com/26576978/220569082-d9e178aa-0c05-4e18-ac0a-b15a5812a226.png">
 
+* To make something pressable which is not a button, for example, its a View, we cannot directly add onClick or onPress like in HTML but we need to wrap it in ```<Pressable onPress={handler}>```
+* Adding click feedback for iOS and Android - Notice android_ripple and the use of a function in style attribute. The function gives states such as pressed which can be used to set styles for that state.
+<img width="1440" alt="image" src="https://user-images.githubusercontent.com/26576978/220605175-c9cd7842-b6e7-44e5-a38f-610c95e827c0.png">
+
 * XYZ
 
