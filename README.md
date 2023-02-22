@@ -68,4 +68,13 @@ https://docs.google.com/presentation/d/1Uz0JUKz6YeB24xLsKsJpmcyph5DjgJU0pZoUuCA8
 <img width="1440" alt="image" src="https://user-images.githubusercontent.com/26576978/220554220-1aa3979a-ca10-4a2b-80c0-2a94ccc6f752.png">
 
 * Sometimes you may need to write different code for each platform cause differences are harder to handle
+* ```<ScrollView>``` - Remember to wrap this in a View, that View will control the size the ScrollView occupies, this will make sure you get the expected proportions and this is a standard way of setting up a ScrollView
+<img width="651" alt="image" src="https://user-images.githubusercontent.com/26576978/220556490-3b0304e9-3aa9-4ffb-96a0-7be55f1ec2d7.png">
+
+* FlatList is better than ScrollView cause it lazy renders children as the user scrolls so it is ideal for long or dynamic lists, ScrollView will render every children regardless of scroll
+* Your data can be a list of objects with each object containing key property which will be automatically picked up by FlatList or you can pass a keyExtractor function to generate a key for each time
+* Remember renderItem function gets itemData which has list item but also some metadata
+<img width="1440" alt="image" src="https://user-images.githubusercontent.com/26576978/220562933-ec512a11-4262-439f-986f-8cf9bb40f512.png">
+
+* XYZ
 
