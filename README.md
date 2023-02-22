@@ -39,8 +39,10 @@ https://docs.google.com/presentation/d/1Uz0JUKz6YeB24xLsKsJpmcyph5DjgJU0pZoUuCA8
 * The style attribute is not supported by all RN components but some like ```<Text>``` and ```<View>```
 * Inline styles, remember the styling is inspired by CSS not is not CSS and does not have all the features, for example, "border" property is not supported but there is "borderWidth" and "borderColor":
 <img width="1440" alt="image" src="https://user-images.githubusercontent.com/26576978/220410912-1f47ec00-af40-48e1-8bd5-5792a345c266.png">
+
 * Better to create Stylesheet object:
 <img width="1440" alt="image" src="https://user-images.githubusercontent.com/26576978/220411870-bda2d68e-af9b-44de-8806-20cb0b56ccb5.png">
+
 * There is flexbox in RN much like CSS and is generally used to create layouts like in web dev
 * Every ```<View>``` by default uses Flexbox unlike divs in HTML and using flex-direction column
 * Flexbox
