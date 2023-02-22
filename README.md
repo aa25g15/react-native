@@ -54,7 +54,7 @@ https://docs.google.com/presentation/d/1Uz0JUKz6YeB24xLsKsJpmcyph5DjgJU0pZoUuCA8
   * A ```flex: 1``` on all children means that all children will be of equal size along main axis
   * Remember Views have flex enabled by default and also default direction is column
 * Button RN component does not support style attribute
-* Events:
+* Events - There are some differences from the web, for example, Button does not have onClick but onPress
 <img width="1440" alt="image" src="https://user-images.githubusercontent.com/26576978/220546586-cfb624f8-2373-4600-9045-db72c66d30ca.png">
 
 * State in a component
@@ -75,6 +75,9 @@ https://docs.google.com/presentation/d/1Uz0JUKz6YeB24xLsKsJpmcyph5DjgJU0pZoUuCA8
 * Your data can be a list of objects with each object containing key property which will be automatically picked up by FlatList or you can pass a keyExtractor function to generate a key for each time
 * Remember renderItem function gets itemData which has list item but also some metadata
 <img width="1440" alt="image" src="https://user-images.githubusercontent.com/26576978/220562933-ec512a11-4262-439f-986f-8cf9bb40f512.png">
+
+* Two way binding on TextInput, attach onChangeText to a handler that updates component state and attach value of TextInput to the state, this is not really specific to RN but is simple React:
+<img width="1440" alt="image" src="https://user-images.githubusercontent.com/26576978/220569082-d9e178aa-0c05-4e18-ac0a-b15a5812a226.png">
 
 * XYZ
 
