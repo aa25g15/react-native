@@ -87,4 +87,7 @@ https://docs.google.com/presentation/d/1Uz0JUKz6YeB24xLsKsJpmcyph5DjgJU0pZoUuCA8
 <img width="1440" alt="image" src="https://user-images.githubusercontent.com/26576978/220606549-f5fd130c-e035-49a8-a7a5-0a827ab062f4.png">
 
 * You can build your own button using ```<Pressable>``` component but remember that styles will not get applied to ```<Button>```, if for example, you need to position these in a row and add margin, you might need to wrap each ```<Button>``` in a ```<View>```
+* Adding an image - Note that this is not the same as the web, we cannot "fetch" and image from an endpoint as such, the ```<Image>``` component also supports the style attribute
+<img width="970" alt="image" src="https://user-images.githubusercontent.com/26576978/220612762-bf9d07b0-aaf1-4512-ba60-00719b5ec877.png">
 
+* XYZ
