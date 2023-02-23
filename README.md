@@ -110,3 +110,7 @@ https://docs.google.com/presentation/d/1Uz0JUKz6YeB24xLsKsJpmcyph5DjgJU0pZoUuCA8
 <img width="552" alt="image" src="https://user-images.githubusercontent.com/26576978/220858286-f9be8722-b423-4707-80fd-48c9af1e6b8c.png">
 
 * Use maxLength to limit the number of characters, notice this has to be a number in braces and not in quotes - ```<TextInput maxLength={2}>```
+* Notice keyboardType and other props:
+<img width="360" alt="image" src="https://user-images.githubusercontent.com/26576978/220863467-f562e013-3ecf-4b1f-9397-ef5a29db8e33.png">
+
+* XYZ
