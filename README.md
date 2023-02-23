@@ -103,7 +103,7 @@ https://docs.google.com/presentation/d/1Uz0JUKz6YeB24xLsKsJpmcyph5DjgJU0pZoUuCA8
 * Maximillian created:
   * A folder screens, for all screens
   * A folder components, for all reusable components used on the screens such as buttons, inputs etc.
-* Custom button - This is how it is implemented in official RN button too:
+* Custom button - This is how it is implemented in official RN button too, this does not have ```<Pressable>``` for now:
 <img width="1440" alt="image" src="https://user-images.githubusercontent.com/26576978/220853362-13aa0e57-ed34-4a0d-a648-7eca3d74934f.png">
 
 * Adding shadows, elevation is Android-only, rest properties are for iOS:
@@ -113,4 +113,8 @@ https://docs.google.com/presentation/d/1Uz0JUKz6YeB24xLsKsJpmcyph5DjgJU0pZoUuCA8
 * Notice keyboardType and other props:
 <img width="360" alt="image" src="https://user-images.githubusercontent.com/26576978/220863467-f562e013-3ecf-4b1f-9397-ef5a29db8e33.png">
 
-* XYZ
+* Custom button - When using an array of styles, all styles will be considered by React Native, notice that the Pressable is around Text and not View, this is because the ripple effect in android needs this type of configuration otherwise you will have the ripple outside the button rather than inside
+<img width="1440" alt="image" src="https://user-images.githubusercontent.com/26576978/220948750-76151144-0b7f-4325-8105-29c6be7c6c8f.png">
+
+* Every View creates a new flexbox container
+* By default, Views only take as much space as they need to fit their content inside themselves
