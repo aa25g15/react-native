@@ -100,3 +100,13 @@ https://docs.google.com/presentation/d/1Uz0JUKz6YeB24xLsKsJpmcyph5DjgJU0pZoUuCA8
 * You can also use react-devtools - ```npm i -g react-devtools```
 * Then, in separate terminal, run command - `react-devtools`
 * Then, enable remote debugging in the developer menu and the devtools will connect, you can see component tree, state etc.
+* Maximillian created:
+  * A folder screens, for all screens
+  * A folder components, for all reusable components used on the screens such as buttons, inputs etc.
+* Custom button - This is how it is implemented in official RN button too:
+<img width="1440" alt="image" src="https://user-images.githubusercontent.com/26576978/220853362-13aa0e57-ed34-4a0d-a648-7eca3d74934f.png">
+
+* Adding shadows, elevation is Android-only, rest properties are for iOS:
+<img width="552" alt="image" src="https://user-images.githubusercontent.com/26576978/220858286-f9be8722-b423-4707-80fd-48c9af1e6b8c.png">
+
+* Use maxLength to limit the number of characters, notice this has to be a number in braces and not in quotes - ```<TextInput maxLength={2}>```
