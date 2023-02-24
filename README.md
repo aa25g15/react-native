@@ -129,3 +129,17 @@ https://docs.google.com/presentation/d/1Uz0JUKz6YeB24xLsKsJpmcyph5DjgJU0pZoUuCA8
 <img width="1022" alt="image" src="https://user-images.githubusercontent.com/26576978/221122851-68194fbb-c607-43e6-93b8-52fba2db5314.png">
 
 * Notice that functions like ```parseInt()``` and ```isNaN()``` are available in RN environment
+* In the course while making the number guessing game, he used useState to switch screen components in the App component based on whether a number was picked or not:
+<img width="1022" alt="image" src="https://user-images.githubusercontent.com/26576978/221125283-2bf730a1-8596-438e-a320-a9bd1548d31f.png">
+
+* Wrap your screen output in ```<SafeAreaView>``` to ensure that device notches, status bar etc. do not conflict with your content, this component automatically detects the device and adds appropriate spacing on the top
+* It is common to do this to manage global colors etc.
+<img width="1244" alt="image" src="https://user-images.githubusercontent.com/26576978/221127874-25d0a7ef-a4f5-4a67-8972-0d24c0f8aab9.png">
+
+* This is how you can add overriding styles to your custom component, in the styles array, the styles on the right will override the styles on the left:
+<img width="1440" alt="image" src="https://user-images.githubusercontent.com/26576978/221142729-315c8072-4942-40f1-b429-cb20168474d1.png">
+
+* For icons you can use ```import {IonIcons} from '@expo/vector-icons';```. Note that there are many other exports available, check documentation.
+<img width="787" alt="image" src="https://user-images.githubusercontent.com/26576978/221143726-8e147fe5-6ee9-4cc5-af24-ebcb042c62df.png">
+
+* XYZ
