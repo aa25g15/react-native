@@ -142,4 +142,9 @@ https://docs.google.com/presentation/d/1Uz0JUKz6YeB24xLsKsJpmcyph5DjgJU0pZoUuCA8
 * For icons you can use ```import {IonIcons} from '@expo/vector-icons';```. Note that there are many other exports available, check documentation.
 <img width="787" alt="image" src="https://user-images.githubusercontent.com/26576978/221143726-8e147fe5-6ee9-4cc5-af24-ebcb042c62df.png">
 
-* XYZ
+* Custom fonts - ```import { useFonts } from 'expo-font'```, install expo-font using expo install
+<img width="816" alt="image" src="https://user-images.githubusercontent.com/26576978/221147791-f101b6ef-4d0c-47eb-99ca-19b831171b84.png">
+
+* You can simply use ```fontFamily: 'open-sans-bold'``` in your style object
+* Also, while fonts are loading, you might want to show a splashscreen, you can use - ```import AppLoading from 'expo-app-loading'```
+
