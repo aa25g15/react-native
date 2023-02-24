@@ -118,3 +118,14 @@ https://docs.google.com/presentation/d/1Uz0JUKz6YeB24xLsKsJpmcyph5DjgJU0pZoUuCA8
 
 * Every View creates a new flexbox container
 * By default, Views only take as much space as they need to fit their content inside themselves
+* To use gradient - ```expo install expo-linear-gradient```
+<img width="1022" alt="image" src="https://user-images.githubusercontent.com/26576978/221119172-a97f7b96-f94e-40bd-9ef3-0a95ec6f3c7f.png">
+
+* Adding background image using ```<ImageBackground>``` from RN:
+<img width="1022" alt="image" src="https://user-images.githubusercontent.com/26576978/221120085-c6ea9546-a115-4fa4-b765-148906606711.png">
+
+* The value you get from TextInput will always be a string, even if you intend it to be a number
+* Showing native alerts - Remember the Alert is imported from RN:
+<img width="1022" alt="image" src="https://user-images.githubusercontent.com/26576978/221122851-68194fbb-c607-43e6-93b8-52fba2db5314.png">
+
+* Notice that functions like ```parseInt()``` and ```isNaN()``` are available in RN environment
