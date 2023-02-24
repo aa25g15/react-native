@@ -149,3 +149,8 @@ https://docs.google.com/presentation/d/1Uz0JUKz6YeB24xLsKsJpmcyph5DjgJU0pZoUuCA8
 * Also, while fonts are loading, you might want to show a splashscreen, you can use - ```import AppLoading from 'expo-app-loading'```
 * To make an image inside a circle, you need to wrap ```<Image />``` in a View and then add same height and width to that view and a borderRadius half of that width or height to make a circle, you need to add ```overflow: 'hidden'``` to make sure everything outside is clipped
 * You can put Text inside Text and style nested Texts differently but remember that unlike View, nested Texts do get influenced by parent Text styling. This is just cause of how the compilation to native components happens.
+* ```maxWidth: '80%'``` - Remember that you can use percentage units too and these will always be in reference to the parent container
+* The Dimensions API allows us to get screen/window sizes which can be used for responsive styling. ```import { Dimensions } from 'react-native'```. Note that there is window and screen, on iOS there is no difference but on Android screen is with status bar and window is without status bar.
+<img width="816" alt="image" src="https://user-images.githubusercontent.com/26576978/221186143-7e95cf0e-64cf-401e-a3d7-4fc79e3daef8.png">
+
+* XYZ
