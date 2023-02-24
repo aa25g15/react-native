@@ -147,4 +147,5 @@ https://docs.google.com/presentation/d/1Uz0JUKz6YeB24xLsKsJpmcyph5DjgJU0pZoUuCA8
 
 * You can simply use ```fontFamily: 'open-sans-bold'``` in your style object
 * Also, while fonts are loading, you might want to show a splashscreen, you can use - ```import AppLoading from 'expo-app-loading'```
-
+* To make an image inside a circle, you need to wrap ```<Image />``` in a View and then add same height and width to that view and a borderRadius half of that width or height to make a circle, you need to add ```overflow: 'hidden'``` to make sure everything outside is clipped
+* You can put Text inside Text and style nested Texts differently but remember that unlike View, nested Texts do get influenced by parent Text styling. This is just cause of how the compilation to native components happens.
