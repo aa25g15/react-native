@@ -153,4 +153,20 @@ https://docs.google.com/presentation/d/1Uz0JUKz6YeB24xLsKsJpmcyph5DjgJU0pZoUuCA8
 * The Dimensions API allows us to get screen/window sizes which can be used for responsive styling. ```import { Dimensions } from 'react-native'```. Note that there is window and screen, on iOS there is no difference but on Android screen is with status bar and window is without status bar.
 <img width="816" alt="image" src="https://user-images.githubusercontent.com/26576978/221186143-7e95cf0e-64cf-401e-a3d7-4fc79e3daef8.png">
 
-* XYZ
+* You can change the orientation using the same flag in App.json, default sets the app to rotate with device rotation, landscape and portrait lock the orientation.
+* Remember that using Dimensions API directly like this will not react to dimension changes while the app is being used, for example, if device rotates from portrait to landscape, so for this, we need to use a hook:
+```javascript
+import { useWindowDimensions } from 'react-native'
+
+const Component = () => {
+ const [width, height] = useWindowDimensions(); // Will listen to size changes
+ 
+ const marginTopDistance = height < 380 ? 30 : 100;
+ 
+ return (
+  <View style={[styles.container, {marginTop: marginTopDistance}]}>
+   <Text>Hello World</Text>
+  </View>
+ );
+}
+```
