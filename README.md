@@ -210,4 +210,7 @@ const route = useRoute(); // Gives the same route object as before, remember thi
 * When getting image from a URL, we need to write source like this and also, it is must to set height and width in this case since RN cannot know this for an image fetched from the web:
 <img width="742" alt="image" src="https://user-images.githubusercontent.com/26576978/221358679-5d702fad-1b1c-4111-acb4-2da66f6bed86.png">
 
+* You can add an options prop like this on each screen to configure that particular screen's navigation header, you can also move some styles to the Navigator wrapper to have default styles for every screen using prop ```screenOptions``` and not just options
+<img width="1440" alt="image" src="https://user-images.githubusercontent.com/26576978/221373770-fc81be0a-b4e8-432f-be52-6a19d9891923.png">
+
 * XYZ
