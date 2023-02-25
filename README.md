@@ -170,3 +170,20 @@ const Component = () => {
  );
 }
 ```
+* Making sure keyboard does not block the UI:
+<img width="1440" alt="image" src="https://user-images.githubusercontent.com/26576978/221350045-6069f6fa-b87a-4fe3-9cc5-738be6fdf496.png">
+
+* With the Platform API imported from RN, you can make changes specific to different platforms such as iOS and Android:
+<img width="816" alt="image" src="https://user-images.githubusercontent.com/26576978/221350634-1754f2ca-0e15-4bb1-af9f-304d0f8f8191.png">
+
+* You can even make different files for Android and iOS like ```Title.android.js``` and ```Title.ios.js``` and import it ONLY as Title and not with platform extensions. This way, RN will select the right file automatically under the hood for the platform. This is not limited to components but can also be done for files like ```Colors.adroid.js``` and ```Colors.ios.js```.
+* Remember in iOS shadow will not be applied unless you add a backgroundColor!
+* Adding routing - Will install a package called React Navigation
+```npm install @react-navigation/native```
+```expo install react-native-screens react-native-safe-area-context```
+* There are different types of navigators but we will for now use Stack navigator:
+```npm install @react-navigation/stack```
+* Then in App component:
+<img width="816" alt="image" src="https://user-images.githubusercontent.com/26576978/221352083-ebd37203-89fb-41c2-a9be-430443a8db45.png">
+
+* Note that by just using this setup, we automatically get a safe area, a background and a header with Screen name etc. We can obviously configure this.
