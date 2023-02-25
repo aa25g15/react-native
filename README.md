@@ -178,6 +178,7 @@ const Component = () => {
 
 * You can even make different files for Android and iOS like ```Title.android.js``` and ```Title.ios.js``` and import it ONLY as Title and not with platform extensions. This way, RN will select the right file automatically under the hood for the platform. This is not limited to components but can also be done for files like ```Colors.adroid.js``` and ```Colors.ios.js```.
 * Remember in iOS shadow will not be applied unless you add a backgroundColor!
+* On FlatList, you can add ```numColumns={2}``` for example, to show the content in 2 columns etc.
 * Adding routing - Will install a package called React Navigation
 ```npm install @react-navigation/native```
 ```expo install react-native-screens react-native-safe-area-context```
@@ -187,3 +188,6 @@ const Component = () => {
 <img width="816" alt="image" src="https://user-images.githubusercontent.com/26576978/221352083-ebd37203-89fb-41c2-a9be-430443a8db45.png">
 
 * Note that by just using this setup, we automatically get a safe area, a background and a header with Screen name etc. We can obviously configure this.
+* Every screen component (the one we defined in ```<Stack.Screen compoment={CategoriesScreen} name="MealsCategories" />```) will get a navigation prop which can be used to navigate between different screens - ```navigation.navigate("MealsOverview");```
+* When setting up a Navigator (like ```<Stack.Navigator>```) and registering its screens (via ```<Stack.Screen>```), you can decide which screen will be shown as a default when the app starts. Out of the box, the top-most screen (i.e. the first child inside of ```<Stack.Navigator>```) is used as the initial screen.
+* You can therefore change the initial screen by changing the ```<Stack.Screen>``` order. Alternatively, there also is an ```initialRouteName``` prop that can be set on the navigator component (i.e., on ```<Stack.Navigator>``` in this case)
