@@ -195,3 +195,19 @@ const Component = () => {
 <img width="742" alt="image" src="https://user-images.githubusercontent.com/26576978/221353241-fe92729a-343c-4eb7-825c-6c48c0f5d9c6.png">
 
 * The Native Stack navigator will use native elements for navigation which is more performant, so this should be the default choice, however, if we run into problems, there is also a Stack navigator that emulates the native behaviour
+* To pass data to next route:
+```javascript
+navigation.navigate("MealsOverview", {
+ mealId: 98 // For example only
+});
+```
+* Then to get this in the next screen:
+```javascript
+const mealId = route.params.mealId; // route will be available as prop in the next screen component, same as navigation
+// Or we can use:
+const route = useRoute(); // Gives the same route object as before, remember this is from "@react-navigation/native"
+```
+* When getting image from a URL, we need to write source like this and also, it is must to set height and width in this case since RN cannot know this for an image fetched from the web:
+<img width="742" alt="image" src="https://user-images.githubusercontent.com/26576978/221358679-5d702fad-1b1c-4111-acb4-2da66f6bed86.png">
+
+* XYZ
