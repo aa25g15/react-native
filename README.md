@@ -183,7 +183,7 @@ const Component = () => {
 ```npm install @react-navigation/native```
 ```expo install react-native-screens react-native-safe-area-context```
 * There are different types of navigators but we will for now use Stack navigator:
-```npm install @react-navigation/stack```
+```npm install @react-navigation/native-stack```
 * Then in App component:
 <img width="816" alt="image" src="https://user-images.githubusercontent.com/26576978/221352083-ebd37203-89fb-41c2-a9be-430443a8db45.png">
 
