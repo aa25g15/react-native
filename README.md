@@ -191,3 +191,7 @@ const Component = () => {
 * Every screen component (the one we defined in ```<Stack.Screen compoment={CategoriesScreen} name="MealsCategories" />```) will get a navigation prop which can be used to navigate between different screens - ```navigation.navigate("MealsOverview");```
 * When setting up a Navigator (like ```<Stack.Navigator>```) and registering its screens (via ```<Stack.Screen>```), you can decide which screen will be shown as a default when the app starts. Out of the box, the top-most screen (i.e. the first child inside of ```<Stack.Navigator>```) is used as the initial screen.
 * You can therefore change the initial screen by changing the ```<Stack.Screen>``` order. Alternatively, there also is an ```initialRouteName``` prop that can be set on the navigator component (i.e., on ```<Stack.Navigator>``` in this case)
+* If you have to trigger navigation deep down the component tree, you might not want to keep passing down the navigation object from screen component, instead, you can use this hook, note that tis is being imported from native only and not native-stack:
+<img width="742" alt="image" src="https://user-images.githubusercontent.com/26576978/221353241-fe92729a-343c-4eb7-825c-6c48c0f5d9c6.png">
+
+* The Native Stack navigator will use native elements for navigation which is more performant, so this should be the default choice, however, if we run into problems, there is also a Stack navigator that emulates the native behaviour
