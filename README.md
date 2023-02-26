@@ -218,3 +218,35 @@ const route = useRoute(); // Gives the same route object as before, remember thi
 
 * Setting navigation option dynamically - Approach 2 - Note that we have used useLayoutEffect rather than useEffect cause useEffect is called when the component has rendered, this will cause a flash of wrong text, useLayoutEffect is triggered before the layout is painted (I think) so there is no flash of wrong text:
 <img width="977" alt="image" src="https://user-images.githubusercontent.com/26576978/221395317-fc2c2956-1e3d-4259-bc96-646be6adf0ef.png">
+
+* Adding custom components to header, as before you can also do it directly on ```Stack.Screen```:
+<img width="977" alt="image" src="https://user-images.githubusercontent.com/26576978/221397045-45bf716f-4e92-4d13-9e51-e18530929141.png">
+
+* Using a drawer navigation - Remember all these different types of navigation are there in the documentation of React Navigation, you can check implementation from there:
+<img width="977" alt="image" src="https://user-images.githubusercontent.com/26576978/221404323-3341e314-27ad-485c-a14c-965123aacd3c.png">
+
+* There are a lot of customization options available for drawers, check documentation
+* This is how you can toggle drawer using navigation object:
+<img width="523" alt="image" src="https://user-images.githubusercontent.com/26576978/221405328-2a35fd67-24f3-4047-b972-58c9b92bfb5a.png">
+
+* There are also tab navigators, super simple to setup, have a look at docs
+* You can even nest navigators such as a stack and a drawer, this might cause 2 headers, so you might have to manually hide one in options
+<img width="1440" alt="image" src="https://user-images.githubusercontent.com/26576978/221406162-f723e3d8-91f4-4ed2-b652-7f1e81c6dd9a.png">
+
+```jsx
+const drawerNavigator = () => {
+ <Drawer.Navigator>
+  <Drawer.Screen component={Screen1Component} name="Screen 1" />
+  <Drawer.Screen component={Screen3Component} name="Screen 3" />
+ </Drawer.Navigator>
+}
+
+<NavigationContainer>
+ <Stack.Navigator>
+   <Stack.Screen component={drawerNavigator} name="Screen 1" options={{
+    headerShown: false
+   }} /> // Notice the nesting here
+   <Stack.Screen component={Screen2Component} name="Screen 2" />
+ </Stack.Navigator>
+</NavigationContainer>
+```
