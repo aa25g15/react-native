@@ -213,4 +213,8 @@ const route = useRoute(); // Gives the same route object as before, remember thi
 * You can add an options prop like this on each screen to configure that particular screen's navigation header, you can also move some styles to the Navigator wrapper to have default styles for every screen using prop ```screenOptions``` and not just options
 <img width="1440" alt="image" src="https://user-images.githubusercontent.com/26576978/221373770-fc81be0a-b4e8-432f-be52-6a19d9891923.png">
 
-* XYZ
+* Setting navigation option dynamically - Approach 1:
+<img width="705" alt="image" src="https://user-images.githubusercontent.com/26576978/221395240-3fd39e49-f61d-4f8b-a46e-7ad527bcc33e.png">
+
+* Setting navigation option dynamically - Approach 2 - Note that we have used useLayoutEffect rather than useEffect cause useEffect is called when the component has rendered, this will cause a flash of wrong text, useLayoutEffect is triggered before the layout is painted (I think) so there is no flash of wrong text:
+<img width="977" alt="image" src="https://user-images.githubusercontent.com/26576978/221395317-fc2c2956-1e3d-4259-bc96-646be6adf0ef.png">
