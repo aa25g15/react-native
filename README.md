@@ -296,3 +296,137 @@ export default FavoritesContextProvider;
 ```jsx
 const favouriteMealsContext = useContext(FavoritesContext); // The object which was created using createContext and is exported
 ```
+* Well I found Redux to be a little more messy when compared to MobX but this is how you use it. Install React Redux Toolkit and React Redux. Note that without the toolkit, you cannot mutate the state in dispatch methods, with the kit you can as it takes care of that under the hood.
+* In store/redux/store.js:
+```jsx
+import { configureStore } from '@reduxjs/toolkit';
+
+import favoritesReducer from './favorites';
+
+export const store = configureStore({
+  reducer: {
+    favoriteMeals: favoritesReducer
+  }
+});
+```
+* In store/redux/favourites.js:
+```jsx
+import { createSlice } from '@reduxjs/toolkit';
+
+const favoritesSlice = createSlice({
+  name: 'favorites',
+  initialState: {
+    ids: []
+  },
+  reducers: {
+    addFavorite: (state, action) => {
+      state.ids.push(action.payload.id);
+    },
+    removeFavorite: (state, action) => {
+      state.ids.splice(state.ids.indexOf(action.payload.id), 1);
+    }
+  }
+});
+
+export const addFavorite = favoritesSlice.actions.addFavorite;
+export const removeFavorite = favoritesSlice.actions.removeFavorite;
+export default favoritesSlice.reducer;
+```
+* How to use the store inside a component:
+```jsx
+import { useLayoutEffect } from 'react';
+import { View, Text, Image, StyleSheet, ScrollView } from 'react-native';
+import { useDispatch, useSelector } from 'react-redux';
+
+import IconButton from '../components/IconButton';
+import List from '../components/MealDetail/List';
+import Subtitle from '../components/MealDetail/Subtitle';
+import MealDetails from '../components/MealDetails';
+import { MEALS } from '../data/dummy-data';
+import { addFavorite, removeFavorite } from '../store/redux/favorites';
+// import { FavoritesContext } from '../store/context/favorites-context';
+
+function MealDetailScreen({ route, navigation }) {
+  // const favoriteMealsCtx = useContext(FavoritesContext);
+  const favoriteMealIds = useSelector((state) => state.favoriteMeals.ids);
+  const dispatch = useDispatch();
+
+  const mealId = route.params.mealId;
+  const selectedMeal = MEALS.find((meal) => meal.id === mealId);
+
+  const mealIsFavorite = favoriteMealIds.includes(mealId);
+
+  function changeFavoriteStatusHandler() {
+    if (mealIsFavorite) {
+      // favoriteMealsCtx.removeFavorite(mealId);
+      dispatch(removeFavorite({ id: mealId }));
+    } else {
+      // favoriteMealsCtx.addFavorite(mealId);
+      dispatch(addFavorite({ id: mealId }));
+    }
+  }
+
+  useLayoutEffect(() => {
+    navigation.setOptions({
+      headerRight: () => {
+        return (
+          <IconButton
+            icon={mealIsFavorite ? 'star' : 'star-outline'}
+            color="white"
+            onPress={changeFavoriteStatusHandler}
+          />
+        );
+      },
+    });
+  }, [navigation, changeFavoriteStatusHandler]);
+
+  return (
+    <ScrollView style={styles.rootContainer}>
+      <Image style={styles.image} source={{ uri: selectedMeal.imageUrl }} />
+      <Text style={styles.title}>{selectedMeal.title}</Text>
+      <MealDetails
+        duration={selectedMeal.duration}
+        complexity={selectedMeal.complexity}
+        affordability={selectedMeal.affordability}
+        textStyle={styles.detailText}
+      />
+      <View style={styles.listOuterContainer}>
+        <View style={styles.listContainer}>
+          <Subtitle>Ingredients</Subtitle>
+          <List data={selectedMeal.ingredients} />
+          <Subtitle>Steps</Subtitle>
+          <List data={selectedMeal.steps} />
+        </View>
+      </View>
+    </ScrollView>
+  );
+}
+
+export default MealDetailScreen;
+
+const styles = StyleSheet.create({
+  rootContainer: {
+    marginBottom: 32,
+  },
+  image: {
+    width: '100%',
+    height: 350,
+  },
+  title: {
+    fontWeight: 'bold',
+    fontSize: 24,
+    margin: 8,
+    textAlign: 'center',
+    color: 'white',
+  },
+  detailText: {
+    color: 'white',
+  },
+  listOuterContainer: {
+    alignItems: 'center',
+  },
+  listContainer: {
+    width: '80%',
+  },
+});
+```
