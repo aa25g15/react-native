@@ -250,3 +250,49 @@ const drawerNavigator = () => {
  </Stack.Navigator>
 </NavigationContainer>
 ```
+* I think in this course creating a context is much simpler than it was in that other course where we used a reducer and what not, this is how we simply created a context for favourite meals:
+```jsx
+import { createContext, useState } from 'react';
+
+export const FavoritesContext = createContext({
+  ids: [],
+  addFavorite: (id) => {},
+  removeFavorite: (id) => {},
+});
+
+function FavoritesContextProvider({ children }) {
+  const [favoriteMealIds, setFavoriteMealIds] = useState([]);
+
+  function addFavorite(id) {
+    setFavoriteMealIds((currentFavIds) => [...currentFavIds, id]);
+  }
+
+  function removeFavorite(id) {
+    setFavoriteMealIds((currentFavIds) =>
+      currentFavIds.filter((mealId) => mealId !== id)
+    );
+  }
+
+  const value = {
+    ids: favoriteMealIds,
+    addFavorite: addFavorite,
+    removeFavorite: removeFavorite,
+  };
+
+  return (
+    <FavoritesContext.Provider value={value}>
+      {children}
+    </FavoritesContext.Provider>
+  );
+}
+
+export default FavoritesContextProvider;
+```
+* Now wrap your app inside
+```jsx
+<FavoritesContextProvider>{Your App}</FavoritesContextProvider>
+```
+* Now to use this context:
+```jsx
+const favouriteMealsContext = useContext(FavoritesContext); // The object which was created using createContext and is exported
+```
