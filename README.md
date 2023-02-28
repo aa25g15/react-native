@@ -432,3 +432,7 @@ const styles = StyleSheet.create({
 ```
 * Remember ```justifyContent: "space-between";``` can be used to position the flex boxes away from each other, I previously used ```marginLeft: "auto"``` for this
 * Also remember that date.getMonth() will return the index of the month starting from 0, so you need to add 1 there
+* With this presentation option, the screen will open and close like a modal:
+<img width="425" alt="image" src="https://user-images.githubusercontent.com/26576978/221823556-599d1918-1252-4345-b343-411a3156c886.png">
+
+* XYZ
