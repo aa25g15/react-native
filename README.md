@@ -430,3 +430,5 @@ const styles = StyleSheet.create({
   },
 });
 ```
+* Remember ```justifyContent: "space-between";``` can be used to position the flex boxes away from each other, I previously used ```marginLeft: "auto"``` for this
+* Also remember that date.getMonth() will return the index of the month starting from 0, so you need to add 1 there
