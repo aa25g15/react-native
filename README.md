@@ -435,4 +435,7 @@ const styles = StyleSheet.create({
 * With this presentation option, the screen will open and close like a modal:
 <img width="425" alt="image" src="https://user-images.githubusercontent.com/26576978/221823556-599d1918-1252-4345-b343-411a3156c886.png">
 
+* Going back to the screen which opened the current screen:
+<img width="351" alt="image" src="https://user-images.githubusercontent.com/26576978/221830435-7401fad6-2a90-45ea-9fc8-0992c3773c17.png">
+
 * XYZ
