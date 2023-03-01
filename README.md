@@ -558,3 +558,96 @@ function ExpensesContextProvider({ children }) {
 
 export default ExpensesContextProvider;
 ```
+* Remember that for inputs such as email addresses, ```autoCapitalize``` and ```autoCorrect``` props on ```<TextInput>``` should be disabled so that the user does not have an annoying experience
+* Remember when using multiline input, you must set textAlignVertical set to 'top', this is also in the docs - https://reactnative.dev/docs/textinput
+* When managing form state which has multiple inputs, you can use this technique to manage state on ```onTextChange``` event effectively, note how we are setting object key dynamically, this is a JS feature and has nothing to do with RN:
+<img width="817" alt="image" src="https://user-images.githubusercontent.com/26576978/222095324-a577f89a-bb0b-452c-8a76-c91fac415455.png">
+
+* Custom input we created in the course:
+```jsx
+import { StyleSheet, Text, TextInput, View } from 'react-native';
+
+import { GlobalStyles } from '../../constants/styles';
+
+function Input({ label, invalid, style, textInputConfig }) {
+
+  const inputStyles = [styles.input];
+
+  if (textInputConfig && textInputConfig.multiline) {
+    inputStyles.push(styles.inputMultiline)
+  }
+
+  if (invalid) {
+    inputStyles.push(styles.invalidInput);
+  }
+
+  return (
+    <View style={[styles.inputContainer, style]}>
+      <Text style={[styles.label, invalid && styles.invalidLabel]}>{label}</Text>
+      <TextInput style={inputStyles} {...textInputConfig} />
+    </View>
+  );
+}
+
+export default Input;
+
+const styles = StyleSheet.create({
+  inputContainer: {
+    marginHorizontal: 4,
+    marginVertical: 8
+  },
+  label: {
+    fontSize: 12,
+    color: GlobalStyles.colors.primary100,
+    marginBottom: 4,
+  },
+  input: {
+    backgroundColor: GlobalStyles.colors.primary100,
+    color: GlobalStyles.colors.primary700,
+    padding: 6,
+    borderRadius: 6,
+    fontSize: 18,
+  },
+  inputMultiline: {
+    minHeight: 100,
+    textAlignVertical: 'top' // Note this is important for multiline input
+  },
+  invalidLabel: {
+    color: GlobalStyles.colors.error500
+  },
+  invalidInput: {
+    backgroundColor: GlobalStyles.colors.error50
+  }
+});
+```
+* Expenses form submit handler, notice the validations and how we have converted string input to appropriate data type:
+```jsx
+function submitHandler() {
+    const expenseData = {
+      amount: +inputs.amount.value,
+      date: new Date(inputs.date.value),
+      description: inputs.description.value,
+    };
+
+    const amountIsValid = !isNaN(expenseData.amount) && expenseData.amount > 0;
+    const dateIsValid = expenseData.date.toString() !== 'Invalid Date';
+    const descriptionIsValid = expenseData.description.trim().length > 0;
+
+    if (!amountIsValid || !dateIsValid || !descriptionIsValid) {
+      // Alert.alert('Invalid input', 'Please check your input values');
+      setInputs((curInputs) => {
+        return {
+          amount: { value: curInputs.amount.value, isValid: amountIsValid },
+          date: { value: curInputs.date.value, isValid: dateIsValid },
+          description: {
+            value: curInputs.description.value,
+            isValid: descriptionIsValid,
+          },
+        };
+      });
+      return;
+    }
+
+    onSubmit(expenseData);
+  }
+```
