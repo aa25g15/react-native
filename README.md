@@ -651,3 +651,20 @@ function submitHandler() {
     onSubmit(expenseData);
   }
 ```
+* To handle form error state, we changed the state of the form as follows, notice now each input key has a value object which stores both value and isValid state, we are utilising this isValid state to make style changes on changing validity:
+```jsx
+const [inputs, setInputs] = useState({
+    amount: {
+      value: defaultValues ? defaultValues.amount.toString() : '',
+      isValid: true,
+    },
+    date: {
+      value: defaultValues ? getFormattedDate(defaultValues.date) : '',
+      isValid: true,
+    },
+    description: {
+      value: defaultValues ? defaultValues.description : '',
+      isValid: true,
+    },
+  });
+```
