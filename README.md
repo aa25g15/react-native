@@ -670,3 +670,69 @@ const [inputs, setInputs] = useState({
 ```
 * We created a realtime DB using Firebase, Firebase automatically adds REST APIs in the foreground that communicate with this DB
 * You can use the fetch API too in RN but we will use Axios as is standard and popular
+* Do not convert useEffect function to an async function, that is discouraged by the React team
+* Util ```https.js``` file for working with Firebase, we focused on RN only, so if you want to see how to work with Firebase, use another source:
+```javascript
+import axios from 'axios';
+
+const BACKEND_URL =
+  'https://react-native-course-3cceb-default-rtdb.firebaseio.com';
+
+export async function storeExpense(expenseData) {
+  const response = await axios.post(BACKEND_URL + '/expenses.json', expenseData);
+  const id = response.data.name;
+  return id;
+}
+
+export async function fetchExpenses() {
+  const response = await axios.get(BACKEND_URL + '/expenses.json');
+
+  const expenses = [];
+
+  for (const key in response.data) {
+    const expenseObj = {
+      id: key,
+      amount: response.data[key].amount,
+      date: new Date(response.data[key].date),
+      description: response.data[key].description
+    };
+    expenses.push(expenseObj);
+  }
+
+  return expenses;
+}
+
+export function updateExpense(id, expenseData) {
+  return axios.put(BACKEND_URL + `/expenses/${id}.json`, expenseData);
+}
+
+export function deleteExpense(id) {
+  return axios.delete(BACKEND_URL + `/expenses/${id}.json`);
+}
+```
+* This is how you can add a spinner in RN:
+```jsx
+import { View, ActivityIndicator, StyleSheet } from 'react-native';
+
+import { GlobalStyles } from '../../constants/styles';
+
+function LoadingOverlay() {
+  return (
+    <View style={styles.container}>
+      <ActivityIndicator size="large" color="white" />
+    </View>
+  );
+}
+
+export default LoadingOverlay;
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: 24,
+    backgroundColor: GlobalStyles.colors.primary700,
+  },
+});
+```
