@@ -668,3 +668,5 @@ const [inputs, setInputs] = useState({
     },
   });
 ```
+* We created a realtime DB using Firebase, Firebase automatically adds REST APIs in the foreground that communicate with this DB
+* You can use the fetch API too in RN but we will use Axios as is standard and popular
