@@ -736,3 +736,11 @@ const styles = StyleSheet.create({
   },
 });
 ```
+* We have used Firebase Authentication (email and password) for another app in the course, see docs
+* We can use replace like this here to not have the back button when navigating and essentially replacing the screen, useful for switching between sign in and sign up for example
+<img width="480" alt="image" src="https://user-images.githubusercontent.com/26576978/223975101-a3ff2169-1063-4171-afc5-e6614715dcdb.png">
+
+* Auth:
+<img width="1440" alt="image" src="https://user-images.githubusercontent.com/26576978/223975739-ef5c676e-1a58-4f00-8de4-fb54a6788756.png">
+
+* XYZ
