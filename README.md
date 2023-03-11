@@ -902,3 +902,4 @@ export async function getAddress(lat, lng) {
 * useCallback hook ensures that a function defined inside a component is not re-created unneccesarily
 * Remember that when you are navigating, the screens are pushed or popped on top of each other, they are not recreated, so some of your code will not run without the use of useIsFocused hook which is a hook that gives a value true when the screen is in focus and false otherwise. Look at the ```LocationPicker.js``` component and you will understand.
 * We are using the Geocoding API to translate corrdinated to human readable addresses
+* For storing data on the device, we are using expo-sqlite, as always, look at the official docs
