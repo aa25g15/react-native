@@ -898,3 +898,5 @@ export async function getAddress(lat, lng) {
   return address;
 }
 ```
+* For showing a full screen map we are using react-native-maps package
+* useCallback hook ensures that a function defined inside a component is not re-created unneccesarily
