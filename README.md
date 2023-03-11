@@ -903,3 +903,9 @@ export async function getAddress(lat, lng) {
 * Remember that when you are navigating, the screens are pushed or popped on top of each other, they are not recreated, so some of your code will not run without the use of useIsFocused hook which is a hook that gives a value true when the screen is in focus and false otherwise. Look at the ```LocationPicker.js``` component and you will understand.
 * We are using the Geocoding API to translate corrdinated to human readable addresses
 * For storing data on the device, we are using expo-sqlite, as always, look at the official docs
+* Interesting new concept, if you do not want to use a parameter but have to write it as such, for example you want only the second argument of a function and not the first, you can do this:
+```js
+(_, secondArg) => { // the _ signifies here that i have to write it but i dont want to use it
+ console.log(secondArg);
+}
+```
