@@ -875,3 +875,26 @@ export default function App() {
 
 * On Android, it automatically asks for permissions, in iOS we have to handle this ourselves
 * For location, we are using expo-location package and since our app does not require getting location in the background, the permissions setup is automatic and will be handled by the package itself. For getting position in background, the setup is more challenging. But remember thae even though permissions are declared automatically, you need to still ask for them in code in both Android and iOS.
+* To show Google Maps in our app for location (either picked on map or using the locate user feature), we are using the Maps Static API from Google.
+* Helper util for working with Google Maps Static API:
+```js
+const GOOGLE_API_KEY = 'AIzaSyD2mP_sDlloOcwv6OLmYtATOJIcnDhcZcg';
+
+export function getMapPreview(lat, lng) {
+  const imagePreviewUrl = `https://maps.googleapis.com/maps/api/staticmap?center=${lat},${lng}&zoom=14&size=400x200&maptype=roadmap&markers=color:red%7Clabel:S%7C${lat},${lng}&key=${GOOGLE_API_KEY}`;
+  return imagePreviewUrl;
+}
+
+export async function getAddress(lat, lng) {
+  const url = `https://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${lng}&key=${GOOGLE_API_KEY}`;
+  const response = await fetch(url);
+
+  if (!response.ok) {
+    throw new Error('Failed to fetch address!');
+  }
+
+  const data = await response.json();
+  const address = data.results[0].formatted_address;
+  return address;
+}
+```
