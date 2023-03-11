@@ -869,3 +869,9 @@ export default function App() {
   );
 }
 ```
+* We are making an app that allows you to store favourite places (the image of the place clicked from camera), for this expo-camera package can be used, there are similar packages for other native features but for this tutorial expo-camera package is too advanced, so we will use the expo-image-picker package.
+* You need to add this in your app.json to properly manage permissions for native device features:
+<img width="1440" alt="image" src="https://user-images.githubusercontent.com/26576978/224472713-056ab053-b774-4e0f-89c4-22399efa4094.png">
+
+* On Android, it automatically asks for permissions, in iOS we have to handle this ourselves
+* For location, we are using expo-location package and since our app does not require getting location in the background, the permissions setup is automatic and will be handled by the package itself. For getting position in background, the setup is more challenging. But remember thae even though permissions are declared automatically, you need to still ask for them in code in both Android and iOS.
