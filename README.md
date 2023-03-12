@@ -909,3 +909,470 @@ export async function getAddress(lat, lng) {
  console.log(secondArg);
 }
 ```
+* THe SQLite DB will persist across app restarts but will be deleted on app uninstall
+* ImagePicker.js
+```jsx
+import { Alert, Image, StyleSheet, Text, View } from 'react-native';
+import {
+  launchCameraAsync,
+  useCameraPermissions,
+  PermissionStatus,
+} from 'expo-image-picker';
+import { useState } from 'react';
+
+import { Colors } from '../../constants/colors';
+import OutlinedButton from '../UI/OutlinedButton';
+
+function ImagePicker({ onTakeImage }) {
+  const [pickedImage, setPickedImage] = useState();
+
+  const [cameraPermissionInformation, requestPermission] =
+    useCameraPermissions();
+
+  async function verifyPermissions() {
+    if (cameraPermissionInformation.status === PermissionStatus.UNDETERMINED) {
+      const permissionResponse = await requestPermission();
+
+      return permissionResponse.granted;
+    }
+
+    if (cameraPermissionInformation.status === PermissionStatus.DENIED) {
+      Alert.alert(
+        'Insufficient Permissions!',
+        'You need to grant camera permissions to use this app.'
+      );
+      return false;
+    }
+
+    return true;
+  }
+
+  async function takeImageHandler() {
+    const hasPermission = await verifyPermissions();
+
+    if (!hasPermission) {
+      return;
+    }
+
+    const image = await launchCameraAsync({
+      allowsEditing: true,
+      aspect: [16, 9],
+      quality: 0.5,
+    });
+
+    setPickedImage(image.uri);
+    onTakeImage(image.uri);
+  }
+
+  let imagePreview = <Text>No image taken yet.</Text>;
+
+  if (pickedImage) {
+    imagePreview = <Image style={styles.image} source={{ uri: pickedImage }} />;
+  }
+
+  return (
+    <View>
+      <View style={styles.imagePreview}>{imagePreview}</View>
+      <OutlinedButton icon="camera" onPress={takeImageHandler}>
+        Take Image
+      </OutlinedButton>
+    </View>
+  );
+}
+
+export default ImagePicker;
+
+const styles = StyleSheet.create({
+  imagePreview: {
+    width: '100%',
+    height: 200,
+    marginVertical: 8,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: Colors.primary100,
+    borderRadius: 4,
+    overflow: 'hidden',
+  },
+  image: {
+    width: '100%',
+    height: '100%',
+  },
+});
+```
+* LocationPicker.js
+```jsx
+import { useEffect, useState } from 'react';
+import { Alert, View, StyleSheet, Image, Text } from 'react-native';
+import {
+  getCurrentPositionAsync,
+  useForegroundPermissions,
+  PermissionStatus,
+} from 'expo-location';
+import {
+  useNavigation,
+  useRoute,
+  useIsFocused,
+} from '@react-navigation/native';
+
+import { Colors } from '../../constants/colors';
+import OutlinedButton from '../UI/OutlinedButton';
+import { getAddress, getMapPreview } from '../../util/location';
+
+function LocationPicker({ onPickLocation }) {
+  const [pickedLocation, setPickedLocation] = useState();
+  const isFocused = useIsFocused();
+
+  const navigation = useNavigation();
+  const route = useRoute();
+
+  const [locationPermissionInformation, requestPermission] =
+    useForegroundPermissions();
+
+  useEffect(() => {
+    if (isFocused && route.params) {
+      const mapPickedLocation = {
+        lat: route.params.pickedLat,
+        lng: route.params.pickedLng,
+      };
+      setPickedLocation(mapPickedLocation);
+    }
+  }, [route, isFocused]);
+
+  useEffect(() => {
+    async function handleLocation() {
+      if (pickedLocation) {
+        const address = await getAddress(
+          pickedLocation.lat,
+          pickedLocation.lng
+        );
+        onPickLocation({ ...pickedLocation, address: address });
+      }
+    }
+
+    handleLocation();
+  }, [pickedLocation, onPickLocation]);
+
+  async function verifyPermissions() {
+    if (
+      locationPermissionInformation.status === PermissionStatus.UNDETERMINED
+    ) {
+      const permissionResponse = await requestPermission();
+
+      return permissionResponse.granted;
+    }
+
+    if (locationPermissionInformation.status === PermissionStatus.DENIED) {
+      Alert.alert(
+        'Insufficient Permissions!',
+        'You need to grant location permissions to use this app.'
+      );
+      return false;
+    }
+
+    return true;
+  }
+
+  async function getLocationHandler() {
+    const hasPermission = await verifyPermissions();
+
+    if (!hasPermission) {
+      return;
+    }
+
+    const location = await getCurrentPositionAsync();
+    setPickedLocation({
+      lat: location.coords.latitude,
+      lng: location.coords.longitude,
+    });
+  }
+
+  function pickOnMapHandler() {
+    navigation.navigate('Map');
+  }
+
+  let locationPreview = <Text>No location picked yet.</Text>;
+
+  if (pickedLocation) {
+    locationPreview = (
+      <Image
+        style={styles.image}
+        source={{
+          uri: getMapPreview(pickedLocation.lat, pickedLocation.lng),
+        }}
+      />
+    );
+  }
+
+  return (
+    <View>
+      <View style={styles.mapPreview}>{locationPreview}</View>
+      <View style={styles.actions}>
+        <OutlinedButton icon="location" onPress={getLocationHandler}>
+          Locate User
+        </OutlinedButton>
+        <OutlinedButton icon="map" onPress={pickOnMapHandler}>
+          Pick on Map
+        </OutlinedButton>
+      </View>
+    </View>
+  );
+}
+
+export default LocationPicker;
+
+const styles = StyleSheet.create({
+  mapPreview: {
+    width: '100%',
+    height: 200,
+    marginVertical: 8,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: Colors.primary100,
+    borderRadius: 4,
+    overflow: 'hidden',
+  },
+  actions: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    alignItems: 'center',
+  },
+  image: {
+    width: '100%',
+    height: '100%',
+    // borderRadius: 4
+  },
+});
+```
+* Map.js
+```jsx
+import { useCallback, useLayoutEffect, useState } from 'react';
+import { Alert, StyleSheet } from 'react-native';
+import MapView, { Marker } from 'react-native-maps';
+
+import IconButton from '../components/UI/IconButton';
+
+function Map({ navigation, route }) {
+  const initialLocation = route.params && {
+    lat: route.params.initialLat,
+    lng: route.params.initialLng,
+  };
+
+  const [selectedLocation, setSelectedLocation] = useState(initialLocation);
+
+  const region = {
+    latitude: initialLocation ? initialLocation.lat : 37.78,
+    longitude: initialLocation ? initialLocation.lng : -122.43,
+    latitudeDelta: 0.0922,
+    longitudeDelta: 0.0421,
+  };
+
+  function selectLocationHandler(event) {
+    if (initialLocation) {
+      return;
+    }
+    const lat = event.nativeEvent.coordinate.latitude;
+    const lng = event.nativeEvent.coordinate.longitude;
+
+    setSelectedLocation({ lat: lat, lng: lng });
+  }
+
+  const savePickedLocationHandler = useCallback(() => {
+    if (!selectedLocation) {
+      Alert.alert(
+        'No location picked!',
+        'You have to pick a location (by tapping on the map) first!'
+      );
+      return;
+    }
+
+    navigation.navigate('AddPlace', {
+      pickedLat: selectedLocation.lat,
+      pickedLng: selectedLocation.lng,
+    });
+  }, [navigation, selectedLocation]);
+
+  useLayoutEffect(() => {
+    if (initialLocation) {
+      return;
+    }
+    navigation.setOptions({
+      headerRight: ({ tintColor }) => (
+        <IconButton
+          icon="save"
+          size={24}
+          color={tintColor}
+          onPress={savePickedLocationHandler}
+        />
+      ),
+    });
+  }, [navigation, savePickedLocationHandler, initialLocation]);
+
+  return (
+    <MapView
+      style={styles.map}
+      initialRegion={region}
+      onPress={selectLocationHandler}
+    >
+      {selectedLocation && (
+        <Marker
+          title="Picked Location"
+          coordinate={{
+            latitude: selectedLocation.lat,
+            longitude: selectedLocation.lng,
+          }}
+        />
+      )}
+    </MapView>
+  );
+}
+
+export default Map;
+
+const styles = StyleSheet.create({
+  map: {
+    flex: 1,
+  },
+});
+```
+* location.js util:
+```js
+const GOOGLE_API_KEY = 'AIzaSyD2mP_sDlloOcwv6OLmYtATOJIcnDhcZcg';
+
+export function getMapPreview(lat, lng) {
+  const imagePreviewUrl = `https://maps.googleapis.com/maps/api/staticmap?center=${lat},${lng}&zoom=14&size=400x200&maptype=roadmap&markers=color:red%7Clabel:S%7C${lat},${lng}&key=${GOOGLE_API_KEY}`;
+  return imagePreviewUrl;
+}
+
+export async function getAddress(lat, lng) {
+  const url = `https://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${lng}&key=${GOOGLE_API_KEY}`;
+  const response = await fetch(url);
+
+  if (!response.ok) {
+    throw new Error('Failed to fetch address!');
+  }
+
+  const data = await response.json();
+  const address = data.results[0].formatted_address;
+  return address;
+}
+```
+* database.js util
+```js
+import * as SQLite from 'expo-sqlite';
+
+import { Place } from '../models/place';
+
+const database = SQLite.openDatabase('places.db');
+
+export function init() {
+  const promise = new Promise((resolve, reject) => {
+    database.transaction((tx) => {
+      tx.executeSql(
+        `CREATE TABLE IF NOT EXISTS places (
+          id INTEGER PRIMARY KEY NOT NULL,
+          title TEXT NOT NULL,
+          imageUri TEXT NOT NULL,
+          address TEXT NOT NULL,
+          lat REAL NOT NULL,
+          lng REAL NOT NULL
+        )`,
+        [],
+        () => {
+          resolve();
+        },
+        (_, error) => {
+          reject(error);
+        }
+      );
+    });
+  });
+
+  return promise;
+}
+
+export function insertPlace(place) {
+  const promise = new Promise((resolve, reject) => {
+    database.transaction((tx) => {
+      tx.executeSql(
+        `INSERT INTO places (title, imageUri, address, lat, lng) VALUES (?, ?, ?, ?, ?)`,
+        [
+          place.title,
+          place.imageUri,
+          place.address,
+          place.location.lat,
+          place.location.lng,
+        ],
+        (_, result) => {
+          resolve(result);
+        },
+        (_, error) => {
+          reject(error);
+        }
+      );
+    });
+  });
+
+  return promise;
+}
+
+export function fetchPlaces() {
+  const promise = new Promise((resolve, reject) => {
+    database.transaction((tx) => {
+      tx.executeSql(
+        'SELECT * FROM places',
+        [],
+        (_, result) => {
+          const places = [];
+
+          for (const dp of result.rows._array) {
+            places.push(
+              new Place(
+                dp.title,
+                dp.imageUri,
+                {
+                  address: dp.address,
+                  lat: dp.lat,
+                  lng: dp.lng,
+                },
+                dp.id
+              )
+            );
+          }
+          resolve(places);
+        },
+        (_, error) => {
+          reject(error);
+        }
+      );
+    });
+  });
+
+  return promise;
+}
+
+export function fetchPlaceDetails(id) {
+  const promise = new Promise((resolve, reject) => {
+    database.transaction((tx) => {
+      tx.executeSql(
+        'SELECT * FROM places WHERE id = ?',
+        [id],
+        (_, result) => {
+          const dbPlace = result.rows._array[0];
+          const place = new Place(
+            dbPlace.title,
+            dbPlace.imageUri,
+            { lat: dbPlace.lat, lng: dbPlace.lng, address: dbPlace.address },
+            dbPlace.id
+          );
+          resolve(place);
+        },
+        (_, error) => {
+          reject(error);
+        }
+      );
+    });
+  });
+
+  return promise;
+}
+```
