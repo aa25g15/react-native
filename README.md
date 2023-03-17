@@ -1376,3 +1376,7 @@ export function fetchPlaceDetails(id) {
   return promise;
 }
 ```
+* How Expo works:
+<img width="1440" alt="image" src="https://user-images.githubusercontent.com/26576978/225819410-de0f7348-aa44-44c8-8e38-b82a2656549e.png">
+
+* XYZ
