@@ -1403,4 +1403,10 @@ export function fetchPlaceDetails(id) {
 * Configuring for PROD:
 <img width="1440" alt="image" src="https://user-images.githubusercontent.com/26576978/225841916-dc81fdfa-ed5a-4dde-a4e1-f6d8324340cb.png">
 
-* XYZ
+* You can build your apps using EAS (Expo Application Services)
+* Before you deploy to App Store or Play Store, make sure you have everything important like version number, build number, name, slug, icon, splash screen etc. in your app.json correctly, look at official docs
+* Environment variables can also be handled, again read docs
+* When you add your splash screen and icon to your expo app, expo will handle the task of creating multiple sizes of your single file automatically to handle different device sizes, without expo, you have to do this manually
+* To do a build follow this - https://docs.expo.dev/build/setup/
+* Before you create a Play Store optimized build (ABB file) you might want to create an installable APK file to test first. The ABB file is not installable but can only install through the Play Store
+* For Apple you need to generate some certificates and files that are needed during the build process, these can be generated from inside the App Developer web page
