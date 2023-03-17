@@ -1386,6 +1386,5 @@ export function fetchPlaceDetails(id) {
 * In this course, we have used Expo managed workflow
 <img width="1440" alt="image" src="https://user-images.githubusercontent.com/26576978/225820505-9a72b3c6-0d91-4036-8554-2a1894b52b26.png">
 
-* XYZ
-
-      tx.executeSql(
+* To use expo bare workflow, you need to follow the steps on the Expo website, also you need to setup the environment for local builds by following RN documentation cause Expo Go App "might" not be compatible in the bare workflow setting since you might be mixing up native code with RN code
+* To start bare workflow just use ```expo init``` and choose minimal option
