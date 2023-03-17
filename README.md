@@ -1395,3 +1395,5 @@ export function fetchPlaceDetails(id) {
 * You can eject from the managed workflow to the bare workflow anytime using ```expo eject```, if asked for Android name write something like "com.yourdomain.yourprojectname" which is basically a reverse URL
 * To start a project without Expo at all you can use ```npx react-native-init AwesomeProject```
 * Remember that in all 3 workflows, the RN code and styling remains the same, the difference is in configuration and third party packages
+* You can convert an Expo managed workflow to bare workflow but not vice-versa, you can also convert Native CLI project to Expo bare project, you cannot use Expo packages such as Expo location without converting to bare workflow at least
+* if you want to use location, instead of Expo Location, you can also use something like react-native-geolocation-service which is independent of Expo and can work on Native CLI project
