@@ -1379,4 +1379,13 @@ export function fetchPlaceDetails(id) {
 * How Expo works:
 <img width="1440" alt="image" src="https://user-images.githubusercontent.com/26576978/225819410-de0f7348-aa44-44c8-8e38-b82a2656549e.png">
 
+* You can still build your app independent of Expo Go App:
+<img width="1440" alt="image" src="https://user-images.githubusercontent.com/26576978/225819728-28df0fbd-eab9-4619-b3b0-c4eaf9a9216b.png">
+
+* You can write your own native code using Objective C, Swift, Kotlin, Android and mix it with your RN code but for that you might want to use Expo bare workflow for more control
+* In this course, we have used Expo managed workflow
+<img width="1440" alt="image" src="https://user-images.githubusercontent.com/26576978/225820505-9a72b3c6-0d91-4036-8554-2a1894b52b26.png">
+
 * XYZ
+
+      tx.executeSql(
