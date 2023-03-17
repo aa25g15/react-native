@@ -1410,3 +1410,10 @@ export function fetchPlaceDetails(id) {
 * To do a build follow this - https://docs.expo.dev/build/setup/
 * Before you create a Play Store optimized build (ABB file) you might want to create an installable APK file to test first. The ABB file is not installable but can only install through the Play Store
 * For Apple you need to generate some certificates and files that are needed during the build process, these can be generated from inside the App Developer web page
+* If you do not wish to build for iOS using Expo, you will have to use XCode which is only available on MacOS
+* Actually the build instructions are pretty complicated, so either got to Udemy and watch the videos again or simply follow a tutorial
+* As shown earlier in the course (when adding native modules to non-Expo apps), you can manage certain aspects of your Android app with the AndroidManifest.xml file. There, you can configure three important things:
+  * The App name as it appears on the home screen: https://stackoverflow.com/questions/5443304/how-to-change-an-android-apps-name
+  * The bundle identifier & package name of the app (also requires tweaking in other files): https://developer.android.com/studio/build/application-id
+  * The permissions of the app: https://developer.android.com/guide/topics/manifest/manifest-intro#perms
+* You should also set an app version and change it with every app update. This is done in the build.gradle file, see: https://developer.android.com/studio/publish/versioning
