@@ -1393,3 +1393,5 @@ export function fetchPlaceDetails(id) {
 * Remember in bare workflow you need a Mac for building iOS apps locally, restriction imposed by Apple
 * In bare workflow, you can still use Expo location and other Expo packages but there are additional steps for setup
 * You can eject from the managed workflow to the bare workflow anytime using ```expo eject```, if asked for Android name write something like "com.yourdomain.yourprojectname" which is basically a reverse URL
+* To start a project without Expo at all you can use ```npx react-native-init AwesomeProject```
+* Remember that in all 3 workflows, the RN code and styling remains the same, the difference is in configuration and third party packages
