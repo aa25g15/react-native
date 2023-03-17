@@ -1388,3 +1388,7 @@ export function fetchPlaceDetails(id) {
 
 * To use expo bare workflow, you need to follow the steps on the Expo website, also you need to setup the environment for local builds by following RN documentation cause Expo Go App "might" not be compatible in the bare workflow setting since you might be mixing up native code with RN code
 * To start bare workflow just use ```expo init``` and choose minimal option
+* Initial local build might take time but subsequent changes are built faster
+* You can still use RN code like before and styling like before with bare workflow
+* Remember in bare workflow you need a Mac for building iOS apps locally, restriction imposed by Apple
+* In bare workflow, you can still use Expo location and other Expo packages but there are additional steps for setup
