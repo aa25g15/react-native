@@ -1400,4 +1400,7 @@ export function fetchPlaceDetails(id) {
 * Publishing
 <img width="1440" alt="image" src="https://user-images.githubusercontent.com/26576978/225841392-9fabab40-5598-4375-b040-14a2a29838eb.png">
 
+* Configuring for PROD:
+<img width="1440" alt="image" src="https://user-images.githubusercontent.com/26576978/225841916-dc81fdfa-ed5a-4dde-a4e1-f6d8324340cb.png">
+
 * XYZ
