@@ -1397,3 +1397,7 @@ export function fetchPlaceDetails(id) {
 * Remember that in all 3 workflows, the RN code and styling remains the same, the difference is in configuration and third party packages
 * You can convert an Expo managed workflow to bare workflow but not vice-versa, you can also convert Native CLI project to Expo bare project, you cannot use Expo packages such as Expo location without converting to bare workflow at least
 * if you want to use location, instead of Expo Location, you can also use something like react-native-geolocation-service which is independent of Expo and can work on Native CLI project
+* Publishing
+<img width="1440" alt="image" src="https://user-images.githubusercontent.com/26576978/225841392-9fabab40-5598-4375-b040-14a2a29838eb.png">
+
+* XYZ
