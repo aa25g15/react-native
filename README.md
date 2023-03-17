@@ -1392,3 +1392,4 @@ export function fetchPlaceDetails(id) {
 * You can still use RN code like before and styling like before with bare workflow
 * Remember in bare workflow you need a Mac for building iOS apps locally, restriction imposed by Apple
 * In bare workflow, you can still use Expo location and other Expo packages but there are additional steps for setup
+* You can eject from the managed workflow to the bare workflow anytime using ```expo eject```, if asked for Android name write something like "com.yourdomain.yourprojectname" which is basically a reverse URL
