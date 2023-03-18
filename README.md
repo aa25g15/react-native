@@ -1431,4 +1431,137 @@ export function fetchPlaceDetails(id) {
 * When using Expo Go, you shouldn't need to ask for any permissions to send or show local notifications (or notifications in general).
   * This will change as you build your app for production though. Even when using Expo's managed workflow, you will then leave the Expo Go app (as a standalone app will be built by EAS - see section 14).
   * To ensure that notifications work correctly, you should therefore ask for permission. For Android, no changes are required. For iOS, you can use the getPermissionsAsync() method (documentation) provided by expo-notifications to get the current permission status. You can use requestPermissionsAsync() (documentation link) to request permissions.
-* XYZ
+* Push notiifcation servers provided by Expo or other providers are actually talking to Google and Apple servers under the hood to send push notifications to other devices, Google and Apple make this mandatory for security reasons:
+<img width="1440" alt="image" src="https://user-images.githubusercontent.com/26576978/226099811-c886b3db-f0eb-4f77-a46c-6e8ce3ed855d.png">
+
+* You can use expo.dev/notifications to test push notifications using your device token which is a unique identifier for your device so that only that device receives that notification
+* App.js for notifications:
+```jsx
+import { useEffect } from 'react';
+import { StatusBar } from 'expo-status-bar';
+import { StyleSheet, Button, View, Alert, Platform } from 'react-native';
+import * as Notifications from 'expo-notifications';
+
+// This is important, without it your notifications will be scheduled but will not display!
+Notifications.setNotificationHandler({
+  handleNotification: async () => {
+    return {
+      shouldPlaySound: false,
+      shouldSetBadge: false,
+      shouldShowAlert: true,
+    };
+  },
+});
+
+export default function App() {
+  useEffect(() => {
+    async function configurePushNotifications() {
+      const { status } = await Notifications.getPermissionsAsync();
+      let finalStatus = status;
+
+      if (finalStatus !== 'granted') {
+        const { status } = await Notifications.requestPermissionsAsync();
+        finalStatus = status;
+      }
+
+      if (finalStatus !== 'granted') {
+        Alert.alert(
+          'Permission required',
+          'Push notifications need the appropriate permissions.'
+        );
+        return;
+      }
+
+      // This is unique for every device
+      const pushTokenData = await Notifications.getExpoPushTokenAsync();
+      console.log(pushTokenData);
+
+      if (Platform.OS === 'android') {
+        Notifications.setNotificationChannelAsync('default', {
+          name: 'default',
+          importance: Notifications.AndroidImportance.DEFAULT,
+        });
+      }
+    }
+
+    configurePushNotifications();
+  }, []);
+
+  useEffect(() => {
+    const subscription1 = Notifications.addNotificationReceivedListener(
+      (notification) => {
+        console.log('NOTIFICATION RECEIVED');
+        console.log(notification);
+        const userName = notification.request.content.data.userName;
+        console.log(userName);
+      }
+    );
+
+    const subscription2 = Notifications.addNotificationResponseReceivedListener(
+      (response) => {
+        console.log('NOTIFICATION RESPONSE RECEIVED');
+        console.log(response);
+        const userName = response.notification.request.content.data.userName;
+        console.log(userName);
+      }
+    );
+
+    // It is very important to clean up subscriptions and event listeners after the component dismounts to
+    // avoid memory leaks
+    return () => {
+      subscription1.remove();
+      subscription2.remove();
+    };
+  }, []);
+
+  function scheduleNotificationHandler() {
+    Notifications.scheduleNotificationAsync({
+      content: {
+        title: 'My first local notification',
+        body: 'This is the body of the notification.',
+        data: { userName: 'Max' },
+      },
+      trigger: {
+        seconds: 5,
+      },
+    });
+  }
+
+  function sendPushNotificationHandler() {
+    fetch('https://exp.host/--/api/v2/push/send', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        to: '<Your Device Push Token>]',
+        title: 'Test - sent from a device!',
+        body: 'This is a test!'
+      })
+    });
+  }
+
+  return (
+    <View style={styles.container}>
+      <Button
+        title="Schedule Notification"
+        onPress={scheduleNotificationHandler}
+      />
+      <Button
+        title="Send Push Notification"
+        onPress={sendPushNotificationHandler}
+      />
+      <StatusBar style="auto" />
+    </View>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#fff',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+});
+```
