@@ -1417,3 +1417,7 @@ export function fetchPlaceDetails(id) {
   * The bundle identifier & package name of the app (also requires tweaking in other files): https://developer.android.com/studio/build/application-id
   * The permissions of the app: https://developer.android.com/guide/topics/manifest/manifest-intro#perms
 * You should also set an app version and change it with every app update. This is done in the build.gradle file, see: https://developer.android.com/studio/publish/versioning
+* Local notifications:
+<img width="1440" alt="image" src="https://user-images.githubusercontent.com/26576978/226098116-cc220059-a291-4bfa-a71f-8a86b0c9bbd6.png">
+
+* For notifications (local and push) we are using ```expo-notifications``` package, it can also be used with bare workflow
