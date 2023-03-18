@@ -1421,3 +1421,14 @@ export function fetchPlaceDetails(id) {
 <img width="1440" alt="image" src="https://user-images.githubusercontent.com/26576978/226098116-cc220059-a291-4bfa-a71f-8a86b0c9bbd6.png">
 
 * For notifications (local and push) we are using ```expo-notifications``` package, it can also be used with bare workflow
+* The trigger type may be confusing - it's basically a combination of multiple supported object types.
+  * You could either set an interval in seconds (as we did in the previous lecture) as described here: https://docs.expo.dev/versions/latest/sdk/notifications/#timeintervalnotificationtrigger
+  * Or you set a specific date (incl. time) at which the notification will be delivered: https://docs.expo.dev/versions/latest/sdk/notifications/#datetriggerinput
+  * Or you set a daily time at which the notification will be sent (Android-only): https://docs.expo.dev/versions/latest/sdk/notifications/#dailynotificationtrigger
+  * Or a weekly trigger (Android-only): https://docs.expo.dev/versions/latest/sdk/notifications/#weeklynotificationtrigger
+  * Or a yearly trigger (Android-only): https://docs.expo.dev/versions/latest/sdk/notifications/#yearlynotificationtrigger
+  * Or a specific date (iOS-only): https://docs.expo.dev/versions/latest/sdk/notifications/#calendarnotificationtrigger
+* When using Expo Go, you shouldn't need to ask for any permissions to send or show local notifications (or notifications in general).
+  * This will change as you build your app for production though. Even when using Expo's managed workflow, you will then leave the Expo Go app (as a standalone app will be built by EAS - see section 14).
+  * To ensure that notifications work correctly, you should therefore ask for permission. For Android, no changes are required. For iOS, you can use the getPermissionsAsync() method (documentation) provided by expo-notifications to get the current permission status. You can use requestPermissionsAsync() (documentation link) to request permissions.
+* XYZ
